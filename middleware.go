@@ -140,7 +140,8 @@ func (m *Middleware) ServeHTTP(rw http.ResponseWriter, r *http.Request, next htt
 	res := rw.(negroni.ResponseWriter)
 
 	if m.logCompleted {
-		m.After(sLog, res, latency, m.Name).Info().Msg("completed handling request")
+		l := m.After(sLog, res, latency, m.Name)
+		l.Info().Msg("completed handling request")
 	}
 }
 
